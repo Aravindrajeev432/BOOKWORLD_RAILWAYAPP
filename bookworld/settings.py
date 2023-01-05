@@ -99,15 +99,31 @@ AUTH_USER_MODEL = 'accounts.Account'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'bookworld2',
+#         'USER': 'postgres',
+#         'PASSWORD':'arvi9895',
+#         'HOST':'localhost'
+#     }
+# }
+
+
+# railway-database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'bookworld2',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD':'arvi9895',
-        'HOST':'localhost'
+        'PASSWORD':config('PASSWORD'),
+        'HOST':config('HOST'),
+        'PORT':'7683'
     }
 }
+
+
+
 #  'HOST':'awseb-e-c9dgzg6fru-stack-awsebrdsdatabase-5jlucff67da9.cth4om7nct5b.us-west-2.rds.amazonaws.com'
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
