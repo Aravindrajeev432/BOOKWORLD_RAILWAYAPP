@@ -17,7 +17,7 @@ def cart(request,total = 0 ,quantity= 0, cart_items = None):
     
     if 'first_name' in request.session:
         print("25")
-        product_offer_details=Product_Offer.objects.all()
+        # product_offer_details=Product_Offer.objects.all()
         p_o_d={}
         c_o_d={}
         #product offer details
@@ -26,15 +26,14 @@ def cart(request,total = 0 ,quantity= 0, cart_items = None):
             print("23")
             user=request.user
             # cart_items=CartItem.objects.filter(user=user,is_active=True)
-            cart_items = CartItem.objects.filter(Q(user_id=uid)& Q(is_active=True) ).order_by('id')
+            cart_items = CartItem.objects.filter(Q(user_id=uid)& Q(is_active=True) ).select_related('product','category').order_by('id')
             for cart_item in cart_items:
                 total +=(cart_item.total_after_discount )
                 quantity += cart_item.quantity
                 
                 try:
                     prod_discount=Product_Offer.objects.get(product_id=cart_item.product.id)
-                    print("*")
-                    print(prod_discount)
+                    
                     p_o_d.update({prod_discount.product_id:prod_discount.discount})
                 except:
                     pass
@@ -65,7 +64,7 @@ def cart(request,total = 0 ,quantity= 0, cart_items = None):
             cart_id=cart.id
             cart_items = CartItem.objects.filter(cart=cart, is_active=True)
             print("70")
-            print(cart_items)
+            
             for cart_item in cart_items:
                 total +=(cart_item.product.price * cart_item.quantity)
                 quantity += cart_item.quantity

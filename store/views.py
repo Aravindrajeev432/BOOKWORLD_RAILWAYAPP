@@ -53,10 +53,9 @@ def cat_view(request,slug):
     # cat =Category.objects.raw('SELECT id FROM category_category where category_name= %s',[slug])
     cat_active = Category.objects.values().filter(category_name__iexact=slug)
     
-    print(cat_active)
     for i in cat_active:
         cat_id=i['id']
-    product = Product.objects.filter(category_id=cat_id,is_active=True).all()
+    product = Product.objects.filter(category_id=cat_id,is_active=True).defer('description','is_active').select_related("category").all()
     cat = Category.objects.all()
     paginator = Paginator(product,6)
     page = request.GET.get('page')

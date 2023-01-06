@@ -25,7 +25,7 @@ def index(request):
 
         try:
             cart_id=Cart.objects.only('id').get(cart_id=uid)
-            nonuser_cart= CartItem.objects.select_related('product__id').filter(cart=cart_id.id).all()
+            nonuser_cart= CartItem.objects.select_related('product').filter(cart=cart_id.id).all()
             
             nonuser_cart_product_ids=[]
             for uc in nonuser_cart:
@@ -37,7 +37,7 @@ def index(request):
             
             nonuser_cart_product_ids=[]        
     try:
-        user_cart= CartItem.objects.filter(user=uid).all()
+        user_cart= CartItem.objects.filter(user=uid).select_related('product').all()
      
         user_cart_product_ids=[]
         for uc in user_cart:
@@ -68,7 +68,7 @@ def index(request):
     
     for poffer in productoffers:
      
-        product_offer_details.update({poffer.product_id:poffer.discount})
+        product_offer_details.update({poffer.product.id:poffer.discount})
     categoryoffers=Category_Offer.objects.filter(active=True)
     for catoffers in categoryoffers:
         category_offer_details.update({catoffers.category_id:catoffers.discount})
