@@ -24,27 +24,27 @@ def index(request):
         uid=_cart_id(request)
 
         try:
-            cart_id=Cart.objects.get(cart_id=uid)
-            nonuser_cart= CartItem.objects.filter(cart=cart_id.id).all()
+            cart_id=Cart.objects.only('id').get(cart_id=uid)
+            nonuser_cart= CartItem.objects.select_related('product__id').filter(cart=cart_id.id).all()
             
             nonuser_cart_product_ids=[]
             for uc in nonuser_cart:
-                print(uc.product.id)
+               
                 nonuser_cart_product_ids.append(uc.product.id)
        
-            print(nonuser_cart_product_ids)
+            # print(nonuser_cart_product_ids)
         except:
             
             nonuser_cart_product_ids=[]        
     try:
         user_cart= CartItem.objects.filter(user=uid).all()
-        print(user_cart)
+     
         user_cart_product_ids=[]
         for uc in user_cart:
-            print(uc.product.id)
+            
             user_cart_product_ids.append(uc.product.id)
             print("********")
-        print(user_cart_product_ids)
+
         nonuser_cart_product_ids=[]
     except:
         print("33")
@@ -61,14 +61,13 @@ def index(request):
 
     
     ###
-    cat = Category.objects.all()
+    cat = Category.objects.only('category_name').all()
     product_offer_details={}
     category_offer_details={}
-    productoffers=Product_Offer.objects.filter(active=True)
-    print(productoffers)
+    productoffers=Product_Offer.objects.select_related('product').filter(active=True)
+    
     for poffer in productoffers:
-        print(poffer.id)
-        print(poffer.discount)
+     
         product_offer_details.update({poffer.product_id:poffer.discount})
     categoryoffers=Category_Offer.objects.filter(active=True)
     for catoffers in categoryoffers:
@@ -80,7 +79,7 @@ def index(request):
     wishlist=[]
     for w in wish:
         wishlist.append(w.product.id)
-    pro = Product.objects.filter(is_active=True).all().order_by('id')
+    pro = Product.objects.filter(is_active=True).defer('description','is_active').select_related("category").all().order_by('id')
     paginator = Paginator(pro,6)
     page = request.GET.get('page')
     paged_products =paginator.get_page(page)
@@ -121,7 +120,7 @@ def homepage(request):
         return redirect('/')
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def profile(request,id):
-    print(request.user)
+    
     try:
         uid= request.session['uid']
     except:
@@ -129,11 +128,10 @@ def profile(request,id):
     if uid != id:
         return redirect('profile',uid)
     user_details = Account.objects.get(id=id)
-    print(id)
+   
     try:
         user_address = Address.objects.get(user_id=id)
-        print(user_address)
-        print(user_address.address_line_2)
+        
     except:
         user_address = " "
     try:

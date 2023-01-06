@@ -22,6 +22,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from bookworld.settings import MEDIA_ROOT
 from django.conf.urls import handler404
+from bookworld.settings import DEBUG
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',views.index,name='index'),
@@ -38,9 +39,12 @@ urlpatterns = [
     path('sales_report/',include('salesreport.urls')),
     path('wishlist',views.wishlist,name="wishlist"),
     path('addwishlist/<int:pid>',views.addwishlist,name="addwishlist"),
-    path('removewishlist/<int:pid>',views.removewishlist,name="removewishlist")
+    path('removewishlist/<int:pid>',views.removewishlist,name="removewishlist"),
+    path('__debug__/', include('debug_toolbar.urls')),
     
 
 ]+static(settings.MEDIA_URL,document_root=MEDIA_ROOT)
 
 handler404='notfoundhandler.views.error_404'
+# if settings.DEBUG:
+#     urlpatterns +=path('__debug__/', include('debug_toolbar.urls')),
