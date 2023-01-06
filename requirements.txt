@@ -20,6 +20,7 @@ django-appconf==1.0.5
 django-image-cropping==1.7
 django-mathfilters==1.0.0
 django-storages==1.13.2
+django_debug_toolbar==3.8.1
 docker==4.4.4
 docker-compose==1.25.5
 dockerpty==0.4.1
