@@ -62,8 +62,8 @@ OPENEXCHANGEKEY=config("openexchangekey")
 #     'debug_toolbar.panels.redirects.RedirectsPanel',
 #     'debug_toolbar.panels.profiling.ProfilingPanel',
 # ]
-
-
+if not DEBUG:
+    CSRF_TRUSTED_ORIGINS=['https://bookworldrailwayapp-production.up.railway.app']
 
 
 INSTALLED_APPS = [
