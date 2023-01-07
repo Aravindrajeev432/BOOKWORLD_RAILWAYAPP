@@ -156,13 +156,13 @@ DATABASES = {
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 
-
+SESSION_ENGINE = 'django.contrib.sessions.backends.cache'
 
 
 CACHES = {
     'default': {
         'BACKEND': 'django.core.cache.backends.redis.RedisCache',
-        'LOCATION': 'redis://default:fQmyc50GyHHzK1PEFWki@containers-us-west-57.railway.app:7728',
+        'LOCATION': config('LOCATION'),
     }
 }
 
