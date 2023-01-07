@@ -35,6 +35,8 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = True
 
 ALLOWED_HOSTS = ['www.bookworldstore.shop','.bookworldstore.shop','*']
+CSRF_TRUSTED_ORIGINS=['https://bookworldrailwayapp-production.up.railway.app']
+
 # Paypal
 ACCOUNT_SID=config("account_sid") 
 AUTH_TOKEN=config("auth_token")
@@ -62,8 +64,6 @@ OPENEXCHANGEKEY=config("openexchangekey")
 #     'debug_toolbar.panels.redirects.RedirectsPanel',
 #     'debug_toolbar.panels.profiling.ProfilingPanel',
 # ]
-if not DEBUG:
-    CSRF_TRUSTED_ORIGINS=['https://bookworldrailwayapp-production.up.railway.app']
 
 
 INSTALLED_APPS = [
