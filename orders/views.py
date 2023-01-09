@@ -705,20 +705,17 @@ def order_history(request):
         uid=request.session['uid']
         current_date=date.today()
         returndate={}
-        order_history= OrderProduct.objects.filter(user_id=uid).annotate(ret=  F('updated_at__date') - current_date ).order_by('-created_at')
+        order_history= OrderProduct.objects.filter(user_id=uid).annotate(ret=  F('updated_at__date') - current_date ).order_by('-created_at').select_related('product','product__category','product__book_name','payment')
         for o in order_history:
             
             r=o.updated_at + datetime.timedelta(days=7)
             # print(o.updated_at + datetime.timedelta(days=7))
-            print("*******")
-            print(r.date())
-            print(current_date)
-            print("******")
+           
             if r.date() > current_date:
                 returndate.update({o.id:False})
             else:
                 returndate.update({o.id:True})
-            print(returndate)
+            
             
    
         context={'order_history':order_history,

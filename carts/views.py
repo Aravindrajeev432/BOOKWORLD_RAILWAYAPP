@@ -26,13 +26,13 @@ def cart(request,total = 0 ,quantity= 0, cart_items = None):
             print("23")
             user=request.user
             # cart_items=CartItem.objects.filter(user=user,is_active=True)
-            cart_items = CartItem.objects.filter(Q(user_id=uid)& Q(is_active=True) ).select_related('product','category').order_by('id')
+            cart_items = CartItem.objects.filter(Q(user_id=uid)& Q(is_active=True) ).order_by('id').select_related('product','product__category')
             for cart_item in cart_items:
                 total +=(cart_item.total_after_discount )
                 quantity += cart_item.quantity
                 
                 try:
-                    prod_discount=Product_Offer.objects.get(product_id=cart_item.product.id)
+                    prod_discount=Product_Offer.objects.get(product_id=cart_item.product.id).select_related('product')
                     
                     p_o_d.update({prod_discount.product_id:prod_discount.discount})
                 except:
@@ -40,7 +40,7 @@ def cart(request,total = 0 ,quantity= 0, cart_items = None):
                 try:
                     print("category id")
                     
-                    cat_discount=Category_Offer.objects.get(category_id=cart_item.product.category.id)
+                    cat_discount=Category_Offer.objects.get(category_id=cart_item.product.category.id).select_related('category')
                     c_o_d.update({cat_discount.category.id:cat_discount.discount})
                 except:
                     pass

@@ -17,7 +17,7 @@ from carts.views import _cart_id
 def index(request):
     try :
         uid = request.session['uid']
-        is_user_blocked=Account.objects.get(id=uid)
+        is_user_blocked=Account.objects.get(id=uid).only('is_user_blocked')
         if is_user_blocked.is_blocked == True:
             return render(request,'userblocked.html')
     except : 
