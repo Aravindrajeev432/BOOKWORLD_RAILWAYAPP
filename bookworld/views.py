@@ -13,6 +13,10 @@ from django.core.paginator import Paginator
 from collections import Counter
 from django.db.models import Count
 from carts.views import _cart_id
+
+
+
+
 @cache_control(no_cache=True, must_revalidate=True, no_store=True)
 def index(request):
     try :

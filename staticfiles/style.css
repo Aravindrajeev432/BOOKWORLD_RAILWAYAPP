@@ -16,11 +16,11 @@ th{
 .btn{
     border-radius:0px;
 }
-.robotothin{
-    font-family:'Roboto Mono', monospace
+.Roboto{
+    font-family:'Roboto', monospace
 
 }
-.roboto{
+.robotothin{
     font-family:'Roboto', sans-serif;
 }
 .ls-4{
@@ -30,7 +30,7 @@ a{
     text-decoration:none;
 }
 .litext{
-    font-family: RobotoThin;
+    font-family: Roboto;
     letter-spacing: 2px;
 }
 .hbox{
@@ -43,7 +43,7 @@ a{
     
 }
 .lbox{
-    font-family: RobotoThin;
+    font-family: Roboto;
 font-size: 18px;
 font-weight: 400;
 line-height: 21px;
@@ -175,7 +175,7 @@ ul.adminmanagement {
     height: 50px;
     font-size: 20px;
     /* box-shadow: 0px 19px 26px -13px #00000040; */
-    font-family: RobotoThin;
+    font-family: Roboto;
     margin-top: 30px;
     border-bottom: #f0aa09 solid 1px;
 
@@ -198,15 +198,15 @@ li.adminmenu:hover {
     text-align: center;
 }
 .adminhead{
-    font-family: RobotoThin;
+    font-family: Roboto;
     letter-spacing: 2px;
     font-size: 26px;
 }
 span.adminheadstatus {
-    font-family: RobotoThin;
+    font-family: Roboto;
 }
 span.authorhead {
-    font-family: RobotoThin;
+    font-family: Roboto;
  
 }
 span.producthead {
@@ -217,7 +217,7 @@ span.producthead {
 span.productprice {
     color: red;
     font-size: 22px;
-    font-family: RobotoThin;
+    font-family: Roboto;
     font-style: italic;
 }
 .onecard{
@@ -248,7 +248,7 @@ transition-duration:.4s;
 }
 
 .productdescription{
-    font-family:RobotoThin;
+    font-family:Roboto;
 }
 button.btn.pbtn {
     background: #6c757d;
@@ -343,12 +343,12 @@ px
     border-bottom-color: #66666629;
 }
 .carttotalhead {
-    font-family: RobotoThin;
+    font-family: Roboto;
     font-size: 17px;
     color: #666666;
 }
 .carttotalprice {
-    font-family: RobotoThin;
+    font-family: Roboto;
     font-size: 20px;
 }
 a#button-plus {
