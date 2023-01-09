@@ -17,11 +17,11 @@ th{
     border-radius:0px;
 }
 .robotothin{
-    font-family:RobotoThin;
+    font-family:'Roboto Mono', monospace
 
 }
 .roboto{
-    font-family:Roboto;
+    font-family:'Roboto', sans-serif;
 }
 .ls-4{
     letter-spacing:2px;
