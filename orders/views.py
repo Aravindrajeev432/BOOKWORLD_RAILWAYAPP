@@ -705,7 +705,7 @@ def order_history(request):
         uid=request.session['uid']
         current_date=date.today()
         returndate={}
-        order_history= OrderProduct.objects.filter(user_id=uid).annotate(ret=  F('updated_at__date') - current_date ).order_by('-created_at').select_related('product','product__category','product__book_name','payment')
+        order_history= OrderProduct.objects.filter(user_id=uid).annotate(ret=  F('updated_at__date') - current_date ).order_by('-created_at').select_related('product','product__category','payment')
         for o in order_history:
             
             r=o.updated_at + datetime.timedelta(days=7)
